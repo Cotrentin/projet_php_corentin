@@ -74,6 +74,17 @@ if (isset($nom) && isset($prenom)) {
 </head>
 <body>
     <h1>Ajout d'un nouvel élève</h1>
+    <form action="../etudiant/nouvel_etudiant.php" method="POST">
+          <div>
+              <label for="nom">Nom :</label>
+              <input type="text" id="nom" name="nom" required>
+          </div>
+          <div>
+              <label for="prenom">Prénom :</label>
+              <input type="text" id="prenom" name="prenom" required>
+          </div>
+          <button type="submit">Valider</button>
+      </form>
     
     <?php if ($success): ?>
         <p class="message success">L'élève a été ajouté avec succès !</p>
@@ -81,6 +92,6 @@ if (isset($nom) && isset($prenom)) {
         <p class="message error"><?php echo $error_message; ?></p>
     <?php endif; ?>
     
-    <a href="../index.php">Retour à l'accueil</a>
+    <a href="../../admin/admin.php">Retour à l'accueil</a>
 </body>
 </html>

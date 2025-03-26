@@ -1,5 +1,5 @@
 <?php
-require_once('../model/pdo.php');
+require_once('C:/MAMP/htdocs/php/projet_php_corentin/TP_9/model/pdo.php');
 
 $classe_id = $_GET['id'];
 
@@ -105,6 +105,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit">Enregistrer</button>
     </form>
     
-    <a href="../admin/admin.php">Retour</a>
+    <a href="../../admin/admin.php">Retour</a>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-require_once('../model/pdo.php');
+require_once('C:/MAMP/htdocs/php/projet_php_corentin/TP_9/model/pdo.php');
 
 $classe_id = $_GET['id'];
 
@@ -62,8 +62,8 @@ try {
 <body>
     <h1>Suppression classe</h1>
     
-    echo '<p class="message">' . $message . '</p>';
+    <p class="message"><?= $message ?></p>
     
-    <a href="../admin/admin.php" class="btn">Retour</a>
+    <a href="../../admin/admin.php" class="btn">Retour</a>
 </body>
 </html>

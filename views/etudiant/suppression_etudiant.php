@@ -59,6 +59,6 @@ $message = "Étudiant supprimé";
     
     <p class="message"><?= $message ?></p>
     
-    <a href="../index.php" class="btn">Retour</a>
+    <a href="../../admin/admin.php" class="btn">Retour</a>
 </body>
 </html>

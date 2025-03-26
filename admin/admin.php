@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_logged'])) {
     exit();
 }
 
-require_once('../model/pdo.php');
+require_once('C:/MAMP/htdocs/php/projet_php_corentin/TP_9/model/pdo.php');
 
 function e($text) {
     echo htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
@@ -194,7 +194,7 @@ $professeurs = $dbPDO->query("SELECT * FROM professeurs")->fetchAll();
 
         <div class="section">
             <h2>Gestion des Professeurs 
-                <a href="../views/professeur/add_prof.php" class="add-btn">+ Ajouter</a>
+                <a href="../views/prof/add_prof.php" class="add-btn">+ Ajouter</a>
             </h2>
             <table>
                 <thead>
@@ -224,8 +224,8 @@ $professeurs = $dbPDO->query("SELECT * FROM professeurs")->fetchAll();
                             ?>
                         </td>
                         <td class="actions">
-                            <a href="../views/professeur/modif_prof.php?id=<?= $professeur['id'] ?>" class="btn btn-edit">Modifier</a>
-                            <a href="../views/professeur/sup_prof.php?id=<?= $professeur['id'] ?>" class="btn btn-delete" onclick="return confirm('Voulez-vous vraiment supprimer ce professeur ?')">Supprimer</a>
+                            <a href="../views/prof/modif_prof.php?id=<?= $professeur['id'] ?>" class="btn btn-edit">Modifier</a>
+                            <a href="../views/prof/sup_prof.php?id=<?= $professeur['id'] ?>" class="btn btn-delete" onclick="return confirm('Voulez-vous vraiment supprimer ce professeur ?')">Supprimer</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>

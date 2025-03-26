@@ -118,6 +118,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button>Enregistrer</button>
     </form>
     
-    <a href="../index.php">Retour</a>
+    <a href="../../admin/admin.php">Retour</a>
 </body>
 </html>

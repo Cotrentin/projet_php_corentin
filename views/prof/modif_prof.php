@@ -1,3 +1,67 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$include_path = 'C:/MAMP/htdocs/php/projet_php_corentin/TP_9/model/pdo.php';
+if (!file_exists($include_path)) {
+    die("Database connection file not found at: " . $include_path);
+}
+
+require_once($include_path);
+
+if (!isset($_GET['id'])) {
+    die("j'avais une erreur id prof manquante donc c pour vérifier");
+}
+
+$professeur_id = $_GET['id'];
+
+try {
+    $professeur = $dbPDO->query("SELECT * FROM professeurs WHERE id = $professeur_id")->fetch();
+    
+    if (!$professeur) {
+        die("Aucun professeur trouvé avec l'ID : " . $professeur_id);
+    }
+} catch (PDOException $e) {
+    die("Erreur de base de données : " . $e->getMessage());
+}
+
+try {
+    $matieres = $dbPDO->query("SELECT * FROM matiere")->fetchAll();
+    $classes = $dbPDO->query("SELECT * FROM classes")->fetchAll();
+} catch (PDOException $e) {
+    die("Erreur lors de la récupération des données : " . $e->getMessage());
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    try {
+        $prenom = $_POST['prenom'];
+        $nom = $_POST['nom'];
+        $matiere = $_POST['matiere'];
+        $classe = $_POST['classe'];
+        
+        $stmt = $dbPDO->prepare("UPDATE professeurs SET 
+            prenom = :prenom,
+            nom = :nom,
+            id_matiere = :matiere,
+            id_classe = :classe 
+            WHERE id = :id");
+        
+        $stmt->execute([
+            ':prenom' => $prenom,
+            ':nom' => $nom,
+            ':matiere' => $matiere,
+            ':classe' => $classe,
+            ':id' => $professeur_id
+        ]);
+        
+        $message = "Modification réussie !";
+        $professeur = $dbPDO->query("SELECT * FROM professeurs WHERE id = $professeur_id")->fetch();
+    } catch (PDOException $e) {
+        $message = "Erreur de modification : " . $e->getMessage();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +75,15 @@
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
+        }
+
+        .error-message {
+            background-color: #f2dede;
+            color: #a94442;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: center;
         }
 
         h1 {
@@ -75,28 +148,36 @@
 <body>
     <h1>Modifier professeur</h1>
     
-    <?php if(isset($message)) echo "<p class='message'>$message</p>"; ?>
+    <?php 
+    if(isset($message)) {
+        $messageClass = strpos($message, 'Erreur') !== false ? 'error-message' : 'message';
+        echo "<p class='$messageClass'>$message</p>"; 
+    }
+    ?>
     
     <form method="POST">
-    <input type="text" name="prenom" value="<?= $professeur['prenom'] ?>" required><br>
-    <input type="text" name="nom" value="<?= $professeur['nom'] ?>" required><br>
-    <select name="matiere" required>
-        <?php foreach($matieres as $m): ?>
-            <option value="<?= $m['id'] ?>" <?= ($m['id'] == $professeur['id_matiere']) ? 'selected' : '' ?>>
-                <?= $m['lib'] ?>
-            </option>
-        <?php endforeach; ?>
-    </select><br>
-    <select name="classe" required>
-        <?php foreach($classes as $c): ?>
-            <option value="<?= $c['id'] ?>" <?= ($c['id'] == $professeur['id_classe']) ? 'selected' : '' ?>>
-                <?= $c['libelle'] ?>
-            </option>
-        <?php endforeach; ?>
-    </select><br>
-    <button type="submit">Enregistrer</button>
-</form>
+        <input type="text" name="prenom" value="<?= $professeur['prenom'] ?>" required><br>
+        <input type="text" name="nom" value="<?= $professeur['nom'] ?>" required><br>
+        
+        <select name="matiere" required>
+            <?php foreach($matieres as $m): ?>
+                <option value="<?= $m['id'] ?>" <?= ($m['id'] == $professeur['id_matiere']) ? 'selected' : '' ?>>
+                    <?= $m['lib'] ?>
+                </option>
+            <?php endforeach; ?>
+        </select><br>
+        
+        <select name="classe" required>
+            <?php foreach($classes as $c): ?>
+                <option value="<?= $c['id'] ?>" <?= ($c['id'] == $professeur['id_classe']) ? 'selected' : '' ?>>
+                    <?= $c['libelle'] ?>
+                </option>
+            <?php endforeach; ?>
+        </select><br>
+        
+        <button type="submit">Enregistrer</button>
+    </form>
     
-    <a href="../admin/admin.php">Retour</a>
+    <a href="../../admin/admin.php">Retour</a>
 </body>
 </html>

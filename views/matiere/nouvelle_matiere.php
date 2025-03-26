@@ -72,7 +72,15 @@ if (!empty($_POST['libelle'])) {
 </head>
 <body>
     <h1>Ajout d'une matière</h1>
+    <form action="../matiere/nouvelle_matiere.php" method="POST">
+          <div>
+              <label for="libelle">Libellé:</label>
+              <input type="text" id="libelle" name="libelle" required>
+          </div>
+              <button type="submit">Valider</button>
+          </div>
+      </form>
     <p><?php echo $message; ?></p>
 </body>
 </html>
-<a href="../index.php">Retour à l'accueil</a>
+<a href="../../admin/admin.php">Retour à l'accueil</a>
