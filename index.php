@@ -1,7 +1,5 @@
 <?php 
-require_once('../TP_9/model/pdo.php');
-
-
+require_once('model/pdo.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -117,30 +115,49 @@ require_once('../TP_9/model/pdo.php');
         a:hover {
             text-decoration: underline;
         }
+
+        .admin-login {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .admin-login:hover {
+            background-color: #2980b9;
+        }
+        .user-actions {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .user-actions a {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .user-actions a:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 <body>
-<h2>Ajout de matiere</h2>
-     <form action="Views/nouvelle_matiere.php" method="POST">
-         <div>
-             <label for="libelle">Libellé:</label>
-             <input type="text" id="libelle" name="libelle" required>
-         </div>
-             <button type="submit">Valider</button>
-         </div>
-     </form>
-     <h2>Ajout d'un nouvel élève</h2>
-     <form action="Views/nouvel_etudiant.php" method="POST">
-         <div>
-             <label for="nom">Nom :</label>
-             <input type="text" id="nom" name="nom" required>
-         </div>
-         <div>
-             <label for="prenom">Prénom :</label>
-             <input type="text" id="prenom" name="prenom" required>
-         </div>
-         <button type="submit">Valider</button>
-     </form>
+<div class="user-actions">
+        <a href="admin/login.php">Connexion</a>
+        <a href="views/nouvel_utilisateur.php">Créer un compte</a>
+    </div>
  </div>
  <div class="section">
  <h1>Affichage de l'école</h1>
@@ -150,7 +167,6 @@ require_once('../TP_9/model/pdo.php');
             <tr>
                 <th>Prénom</th>
                 <th>Nom</th>
-                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -159,8 +175,6 @@ require_once('../TP_9/model/pdo.php');
                 echo "<tr>
                 <td>{$row['prenom']}</td>
                 <td>{$row['nom']}</td>
-                <td><a href='Views/modif_etudiant.php?id={$row['id']}'>Modifier</a></td>
-                <td><a href='Views/suppression_etudiant.php?id={$row['id']}'>Supprimer</a></td>
                 </tr>";
             }
             ?>
