@@ -48,10 +48,11 @@ require_once('../TP_9/model/pdo.php');
             <?php
             foreach ($dbPDO->query("SELECT id, prenom, nom FROM etudiants ORDER BY nom, prenom") as $row) {
                 echo "<tr>
-                        <td>{$row['prenom']}</td>
-                        <td>{$row['nom']}</td>
-                        <td><a href='Views/modif_etudiant.php?id={$row['id']}'>Modifier</a></td>
-                      </tr>";
+                <td>{$row['prenom']}</td>
+                <td>{$row['nom']}</td>
+                <td><a href='Views/modif_etudiant.php?id={$row['id']}'>Modifier</a></td>
+                <td><a href='Views/suppression_etudiant.php?id={$row['id']}'>Supprimer</a></td>
+                </tr>";
             }
             ?>
         </tbody>
