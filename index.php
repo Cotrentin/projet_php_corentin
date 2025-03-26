@@ -33,18 +33,30 @@ require_once('../TP_9/model/pdo.php');
          <button type="submit">Valider</button>
      </form>
  </div>
-    <h1>Affichage de l'école</h1>
-    <div class="section">
-        <h2>Liste des étudiants</h2>
-        <ul>
+ <div class="section">
+ <h1>Affichage de l'école</h1>
+    <h2>Liste des étudiants</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
             <?php
-            foreach ($dbPDO->query("SELECT prenom, nom FROM etudiants ORDER BY nom, prenom") as $row) {
-                echo "<li>{$row['prenom']} {$row['nom']}</li>";
+            foreach ($dbPDO->query("SELECT id, prenom, nom FROM etudiants ORDER BY nom, prenom") as $row) {
+                echo "<tr>
+                        <td>{$row['prenom']}</td>
+                        <td>{$row['nom']}</td>
+                        <td><a href='Views/modif_etudiant.php?id={$row['id']}'>Modifier</a></td>
+                      </tr>";
             }
             ?>
-        </ul>
-    </div>
-    
+        </tbody>
+    </table>
+</div>
     <div class="section">
         <h2>Liste des classes</h2>
         <ul>
