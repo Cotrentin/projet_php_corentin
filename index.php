@@ -1,5 +1,7 @@
 <?php 
-require('../TP_9/model/pdo.php');
+require_once('../TP_9/model/pdo.php');
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -9,8 +11,29 @@ require('../TP_9/model/pdo.php');
     <title>Gestion de l'école</title>
 </head>
 <body>
+<h2>Ajout de matiere</h2>
+     <form action="Views/nouvelle_matiere.php" method="POST">
+         <div>
+             <label for="libelle">Libellé:</label>
+             <input type="text" id="libelle" name="libelle" required>
+         </div>
+             <button type="submit">Valider</button>
+         </div>
+     </form>
+     <h2>Ajout d'un nouvel élève</h2>
+     <form action="Views/nouvel_etudiant.php" method="POST">
+         <div>
+             <label for="nom">Nom :</label>
+             <input type="text" id="nom" name="nom" required>
+         </div>
+         <div>
+             <label for="prenom">Prénom :</label>
+             <input type="text" id="prenom" name="prenom" required>
+         </div>
+         <button type="submit">Valider</button>
+     </form>
+ </div>
     <h1>Affichage de l'école</h1>
-    
     <div class="section">
         <h2>Liste des étudiants</h2>
         <ul>
